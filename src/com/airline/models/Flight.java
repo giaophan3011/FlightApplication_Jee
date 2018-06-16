@@ -27,6 +27,10 @@ public class Flight implements Serializable {
 	@Enumerated (EnumType.STRING)
 	private FlightDestinations flightDestination;
 	
+	@OneToOne
+	@JoinColumn (name = "airplane_fk")
+	//This column will be created in Airplane.java entity, that will store the ID of the airplane.
+	private Airplane planeDetails;
 	private Integer price;
 	@Temporal (TemporalType.TIMESTAMP)
 	private Date flightTime;
@@ -36,6 +40,12 @@ public class Flight implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Airplane getPlaneDetails() {
+		return planeDetails;
+	}
+	public void setPlaneDetails(Airplane planeDetails) {
+		this.planeDetails = planeDetails;
 	}
 	public FlightDestinations getFlightOrigin() {
 		return flightOrigin;
@@ -65,8 +75,5 @@ public class Flight implements Serializable {
 	public String toString() {
 		return "Flight [id=" + id + ", flightOrigin=" + flightOrigin + ", flightDestination=" + flightDestination
 				+ ", price=" + price + ", flightTime=" + flightTime + "]";
-	}
-	
-	
-   
+	}   
 }
